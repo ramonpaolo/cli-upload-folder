@@ -3,11 +3,15 @@ import { hostname } from 'os'
 import fs from 'fs'
 import path from 'path'
 import mime from 'mime'
+import chalk from 'chalk'
 
+const logSuccess = (text: string) => {
+    console.log(chalk.green(text))
+}
 
-const { ACCESS_KEY_ID, SECRET_ACCESS_KEY } = process.env
+const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET_NAME } = process.env
 
-const BUCKET = `${ACCESS_KEY_ID}-personal-bucket`
+const BUCKET = BUCKET_NAME || `${ACCESS_KEY_ID}-personal-bucket`
 
 const s3 = new S3({
     credentials: {
@@ -28,8 +32,6 @@ const file = async (pathToFile: string, folderToUpload?: string) => {
 }
 
 const uploadFile = (file: any, filename: string, mimetype: string, folderToUpload?: string) => {
-    console.log(filename, mimetype, folderToUpload)
-
     const batch = s3.upload({
         Bucket: BUCKET,
         Key: folderToUpload ? path.join(folderToUpload, filename) : filename,
@@ -45,7 +47,7 @@ const uploadFile = (file: any, filename: string, mimetype: string, folderToUploa
             console.log(err)
             return 0;
         }
-        console.log(`File: ${data.Key} was upload with success ✅`)
+        logSuccess(`File '${data.Key}' was uploaded with success ✅`)
     })
 }
 
