@@ -11,6 +11,19 @@
     "start": "node dist/index.js",
     "build": "tsc"
   },
+  "keywords": [
+    "cli"
+  ],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "url": "https://github.com/ramonpaolo/cli-upload-folder.git",
+    "type": "git"
+  },
+  "bin": {
+    "cli-upload-folder": "dist/index.js"
+  },
   "dependencies": {
     "aws-sdk": "^2.1380.0",
     "chalk": "4",
