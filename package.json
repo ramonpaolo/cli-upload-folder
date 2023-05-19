@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config src/index.ts",
     "start": "node dist/index.js",
+    "prepublish": "tsc",
     "build": "tsc"
   },
   "keywords": [
