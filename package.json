@@ -1,0 +1,25 @@
+{
+  "name": "cli-upload-folder",
+  "version": "1.0.0",
+  "description": "CLI to upload folder or files to a bucket on S3",
+  "main": "dist/index.js",
+  "author": "Ramon Paolo Maram",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "nodemon -r dotenv/config src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1380.0",
+    "mime": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/mime": "^3.0.1",
+    "@types/node": "^20.2.1",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
