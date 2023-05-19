@@ -1,0 +1,1 @@
+npm run build && npm remove -g cli-upload-folder && npm i -g
