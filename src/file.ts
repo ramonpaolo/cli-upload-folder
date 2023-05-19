@@ -25,11 +25,11 @@ const file = async (pathToFile: string, folderToUpload?: string) => {
     fs.readFile(pathToFile, 'utf-8', (err, data) => {
         if(err) return console.error(err)
 
-        uploadFile(data, filename, mimeType!, folderToUpload)
+        uploadFile(data, pathToFile, filename, mimeType!, folderToUpload)
     })
 }
 
-const uploadFile = (file: any, filename: string, mimetype: string, folderToUpload?: string) => {
+const uploadFile = (file: any, pathToFile: string, filename: string, mimetype: string, folderToUpload?: string) => {
     const batch = s3.upload({
         Bucket: String(BUCKET),
         Key: folderToUpload ? path.join(folderToUpload, filename) : filename,
@@ -45,7 +45,7 @@ const uploadFile = (file: any, filename: string, mimetype: string, folderToUploa
             console.log(err)
             return 0;
         }
-        logSuccess(`File '${data.Key}' was uploaded with success ✅`)
+        logSuccess(`File '${pathToFile}' was uploaded with success ✅`)
     })
 }
 
