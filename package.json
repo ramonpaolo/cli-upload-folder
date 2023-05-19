@@ -14,11 +14,13 @@
   "dependencies": {
     "aws-sdk": "^2.1380.0",
     "chalk": "4",
-    "mime": "^3.0.0"
+    "mime": "^3.0.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@types/mime": "^3.0.1",
     "@types/node": "^20.2.1",
+    "@types/yargs": "^17.0.24",
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.1",
