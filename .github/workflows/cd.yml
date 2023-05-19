@@ -1,0 +1,30 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish_npm:
+    name: Publishing to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup NodeJs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.17
+          registry-url: https://registry.npmjs.org/
+      
+      - name: Install Packages
+        run: yarn
+
+      - uses: ramonpaolo/bump-version@v1.0.0
+        with: 
+          tag: ${{ github.ref_name }}
+
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
