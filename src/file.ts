@@ -9,7 +9,7 @@ const logSuccess = (text: string) => {
     console.log(chalk.green(text))
 }
 
-const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET } = process.env
+const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET, STORAGE_CLASS } = process.env
 
 const s3 = new S3({
     credentials: {
@@ -34,7 +34,7 @@ const uploadFile = (file: any, filename: string, mimetype: string, folderToUploa
         Bucket: String(BUCKET),
         Key: folderToUpload ? path.join(folderToUpload, filename) : filename,
         ServerSideEncryption: 'AES256',
-        StorageClass: 'INTELLIGENT_TIERING',
+        StorageClass: STORAGE_CLASS,
         Tagging: `Hostname=${hostname()}`,
         ContentType: mimetype,
         Body: file,
