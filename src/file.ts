@@ -9,9 +9,7 @@ const logSuccess = (text: string) => {
     console.log(chalk.green(text))
 }
 
-const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET_NAME } = process.env
-
-const BUCKET = BUCKET_NAME || `${ACCESS_KEY_ID}-personal-bucket`
+const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET } = process.env
 
 const s3 = new S3({
     credentials: {
@@ -33,7 +31,7 @@ const file = async (pathToFile: string, folderToUpload?: string) => {
 
 const uploadFile = (file: any, filename: string, mimetype: string, folderToUpload?: string) => {
     const batch = s3.upload({
-        Bucket: BUCKET,
+        Bucket: String(BUCKET),
         Key: folderToUpload ? path.join(folderToUpload, filename) : filename,
         ServerSideEncryption: 'AES256',
         StorageClass: 'INTELLIGENT_TIERING',
