@@ -3,11 +3,8 @@ import { hostname } from 'os'
 import fs from 'fs'
 import path from 'path'
 import mime from 'mime'
-import chalk from 'chalk'
 
-const logSuccess = (text: string) => {
-    console.log(chalk.green(text))
-}
+import { logError, logSuccess } from './utils'
 
 const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET, STORAGE_CLASS } = process.env
 
@@ -23,7 +20,7 @@ const file = async (pathToFile: string, folderToUpload?: string) => {
     const mimeType = mime.getType(pathToFile)
 
     fs.readFile(pathToFile, 'utf-8', (err, data) => {
-        if(err) return console.error(err)
+        if(err) return logError(err)
 
         uploadFile(data, pathToFile, filename, mimeType!, folderToUpload)
     })
@@ -42,7 +39,7 @@ const uploadFile = (file: any, pathToFile: string, filename: string, mimetype: s
 
     batch.send((err, data) => {
         if (err) {
-            console.log(err)
+            logError(`Error on upload file '${pathToFile}' ❌`)
             return 0;
         }
         logSuccess(`File '${pathToFile}' was uploaded with success ✅`)

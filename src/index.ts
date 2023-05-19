@@ -7,6 +7,7 @@ import { hideBin } from 'yargs/helpers'
 
 import directory from './directory'
 import file from './file'
+import { logError } from './utils'
 
 dotenv.config()
 
@@ -24,7 +25,7 @@ const path = argv['path-local']
 const folderToUpload = argv['path-upload']
 
 fs.stat(path, (err, data) => {
-    if (err) return console.error(err)
+    if (err) return logError(err)
 
     const isDirectory = data.isDirectory()
 
