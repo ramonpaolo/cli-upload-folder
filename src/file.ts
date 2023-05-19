@@ -32,7 +32,7 @@ const uploadFile = (file: any, filename: string, mimetype: string, folderToUploa
 
     const batch = s3.upload({
         Bucket: BUCKET,
-        Key: folderToUpload ? `${folderToUpload}/${filename}` : filename,
+        Key: folderToUpload ? path.join(folderToUpload, filename) : filename,
         ServerSideEncryption: 'AES256',
         StorageClass: 'INTELLIGENT_TIERING',
         Tagging: `Hostname=${hostname()}`,
@@ -45,7 +45,7 @@ const uploadFile = (file: any, filename: string, mimetype: string, folderToUploa
             console.log(err)
             return 0;
         }
-        console.log(data)
+        console.log(`File: ${data.Key} was upload with success ✅`)
     })
 }
 

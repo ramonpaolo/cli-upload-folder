@@ -14,6 +14,6 @@ fs.stat(path, (err, data) => {
 
     const isDirectory = data.isDirectory()
 
-    if(isDirectory) return directory(path)
+    if(isDirectory) return directory(path, folderToUpload)
     return file(path, folderToUpload)
 })

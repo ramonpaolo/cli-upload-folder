@@ -1,17 +1,13 @@
-import { exec } from 'child_process'
 import fs from 'fs'
+import path from 'path'
 
-const directory = async (path: string) => {
-    console.log(path)
+import file from './file'
 
-    exec(`cd ${path} && ls -la`, (err, stdout, stderr) => {
-        if(err){
-            console.log(err)
-            console.log(stderr)
-            return 0;
-        }
-        
-        console.log(stdout)
+const directory = async (pathToDirectory: string, folderToUpload?: string) => {
+    fs.readdir(pathToDirectory, 'utf-8', (err, files) => {
+        if(err) return console.log(err)
+
+        files.map((filename) => file(path.join(pathToDirectory, filename), folderToUpload))
     })
 }
 
