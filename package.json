@@ -13,7 +13,7 @@
     "build": "tsc"
   },
   "keywords": [
-    "cli"
+    "cli", "backup", "typescript", "aws", "s3", "aws-s3"
   ],
   "files": [
     "dist"
